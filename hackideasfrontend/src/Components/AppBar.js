@@ -16,6 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { GiBrain } from "react-icons/fa";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -168,7 +169,7 @@ export default function AppBarComponent() {
           >
             <MenuIcon />
           </IconButton> */}
-          <LightbulbIcon style={{color:"black"}}/>
+          <LightbulbIcon style={{color:"orange", marginTop:-3}} fontSize="large"/>
           <Typography
             variant="h6"
             color="black"
