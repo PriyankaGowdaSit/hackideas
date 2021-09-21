@@ -24,23 +24,15 @@ const bull = (
 
 
 export default function BasicCard(props) {
-    const [ideas, setIdeas] = React.useState(props.ideas)
+    // const [ideas, setIdeas] = React.useState(props.ideas)
     const [displayUpdatedData, setDisplayUpdatedData] = React.useState(false)
-    const handleSort = () =>{
-        const sortedIdeas = [...ideas].sort((a, b) => {
-            return b.likes - a.likes;
-          });
-      setIdeas(sortedIdeas)
-      console.log(ideas)
-       
-        
-    }
+  
   return (
      <div>
-     {console.log(ideas)}
-     <Button variant="contained" color="primary" onClick={handleSort}>Sort</Button>
+     {/* {console.log(ideas)} */}
+     {/* <Button variant="contained" color="primary" onClick={handleSort}>Sort</Button> */}
      <div style={{marginTop:40, marginLeft:300}}>
-      {ideas.map((idea,i) => {
+      {props.ideas.map((idea,i) => {
           return(
     <Card key={i} sx={{ minWidth: 275, maxWidth: 700 , marginLeft:10, marginTop:3}}>
       <CardContent>

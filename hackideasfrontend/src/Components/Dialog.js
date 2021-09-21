@@ -74,7 +74,7 @@ export default function DialogComponent(props) {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="filterSelectedOptions"
+            label="Tags"
             placeholder="Tags"
           />
         )}
