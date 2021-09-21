@@ -4,6 +4,8 @@ import LoginUser from "../Components/LoginUser";
 import IdeasPage from './IdeasPage';
 export default function Home(){
 
+  
+
     return(
         <>
         <AppBarComponent/>
