@@ -9,7 +9,7 @@ export default function LoginUser() {
     const history = useHistory();
 
     const handleEmployeeLogin = () => {
-        history.push("/ideas")
+        history.push(`/ideas/id-${employeeId}`)
     }
 
     return (
@@ -34,7 +34,7 @@ export default function LoginUser() {
                         <Button color="primary" variant="contained" onClick={handleEmployeeLogin} style={{ width: 200, height: 50, marginLeft: 50 }} disabled={employeeId !== '' ? false : true}>Get Started<ArrowRightAltIcon /></Button>
                     </div>
 
-                    <img src="/Images/coverpage.png" height="600" width="450" style={{ marginLeft: "auto", marginRight: 150 }} />
+                    <img src="/Images/coverpage.png" height="600" width="450" style={{ marginLeft: "auto", marginRight: 150 }} alt="display"/>
 
                 </Grid>
                 {/* <Grid item xs={12} md={12} style={{display:"flex"}}>

@@ -41,3 +41,10 @@
   margin-top: 20px;
   width: 400px;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:40;
+}

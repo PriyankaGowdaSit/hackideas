@@ -1,135 +1,145 @@
 import React from 'react'
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import AddIcon from '@mui/icons-material/Add';
 import DialogComponent from '../Components/Dialog';
 import IdeasCard from '../Components/IdeasCard';
 import SelectComponent from '../Components/SelectComponent';
-export default function IdeasPage(){
-    const sortOptions = [{value:"Upvotes"},{value:"Date Created"}]
-    const [ideas2, setIdeas2]=React.useState([
-        {
-           
-            'title' : 'Card Title',
-            'description' : 'Description of the title',
-            'likes' : 22,
-            'tags' : [{'id':1, 'value':"ML"},{'id':2, 'value':"AI"},{'id':3, 'value':"Cloud Computing"}],
-            'posted_by' : 'Priyanka MB',
-            'date_posted' :  (new Date()).setDate(16),
-            'liked_by' : ['Priyanka M.B', 'User2']
+const styles = {
+    root: {
+        marginTop: -80
+    },
+    button: {
+        marginLeft: 150,
+        marginTop: 20
+    },
+    container: {
+        width: 600,
+        margin: 'auto'
+    }
 
-        },
-        {
-           
-            'title' : 'Card Title New',
-            'description' : 'Description of the title new',
-            'likes' : 22,
-            'tags' : [{'id':1, 'value':"ML"},{'id':2, 'value':"AI"},{'id':3, 'value':"Cloud Computing"}],
-            'posted_by' : 'Priyanka MB',
-            'date_posted' :  (new Date()).setDate(15),
-            'liked_by' : ['Priyanka M.B', 'User2']
-
-        },
-        {
-           
-            'title' : 'Card Title New 4',
-            'description' : 'Description of the title',
-            'likes' : 28,
-            'tags' : [{'id':1, 'value':"ML"},{'id':2, 'value':"AI"},{'id':3, 'value':"Cloud Computing"}],
-            'posted_by' : 'Priyanka MB',
-            'date_posted' :  (new Date()).setDate(1),
-            'liked_by' : ['Priyanka M.B', 'User2']
-
-        },
-        {
-           
-            'title' : 'Card Title 7',
-            'description' : 'Description of the title',
-            'likes' : 22,
-            'tags' : [{'id':1, 'value':"ML"},{'id':2, 'value':"AI"},{'id':3, 'value':"Cloud Computing"}],
-            'posted_by' : 'Priyanka MB',
-            'date_posted' : (new Date()).setDate(11),
-            'liked_by' : ['Priyanka M.B', 'User2']
-
-        }
-    ])
-    localStorage.setItem("data", JSON.stringify(ideas2))
-    const [ideas, setIdeas]  = React.useState(JSON.parse(localStorage.getItem("data")))
+}
+export default function IdeasPage(props) {
+    const sortOptions = [{ value: "Upvotes" }, { value: "Date Created" }]
+    const employeeId = props.employeeId
+    const [ideas, setIdeas] = React.useState([])
     console.log(ideas)
 
 
     const [displayIdeaFormDialog, setDisplayIdeaFormDialog] = React.useState(false)
-    React.useEffect(() =>{
-     
- const sortedIdeas = [...ideas].sort((a, b) => {
-            return b.likes - a.likes;
-          });
-      setIdeas(sortedIdeas)
-      console.log(ideas)
+    React.useEffect(() => {
 
-    }, [])
-   const handleCloseIdeaFormDialog = (dialogOpenStatus) =>{
-       setDisplayIdeaFormDialog(dialogOpenStatus)
-   }
-   const handleSubmitIdeaFormDialog = (FormData) =>{
-       var updateIdeas = ideas
-       console.log(FormData)
-       setIdeas(ideas => [...ideas, FormData])
-       console.log(updateIdeas)
-      updateIdeas.push(FormData)
-      console.log(updateIdeas)
-       localStorage.setItem("data", JSON.stringify(updateIdeas))
-       setDisplayIdeaFormDialog(false)
-   }
-  
-
-const sortBySelectedOption = (sortOption) => {
-    const sortingOption = sortOption['value']
-     if(sortingOption==="Upvotes"){
-        const sortedIdeas = [...ideas].sort((a, b) => {
-            return b.likes - a.likes;
-          });
-      setIdeas(sortedIdeas)
-      console.log(ideas)
-     }
-     else {
-        const sortedIdeas = [...ideas].sort((a, b) => {
-            return new Date(b.date_posted)- new Date(a.date_posted);
-          });
-      setIdeas(sortedIdeas)
-      console.log(ideas) 
-     }
-}
-const handleLikesChange = (idea) =>{
-    var temp_idea = idea
-    idea['liked_by'] = temp_idea['liked_by'].filter((item=> item!='Priyanka M.B'))
-    // idea = temp_idea
-    idea['likes'] = temp_idea['likes']-1
-   console.log(idea)
-   const updatedIdeas = ideas.map((item) =>
-      item['title'] === idea['title'] ? idea : item
-    );
-    console.log(updatedIdeas)
-    setIdeas(updatedIdeas)
+        if (JSON.parse(localStorage.getItem("data")) !== null) {
+            var stored_data = JSON.parse(localStorage.getItem("data"))
+            setIdeas(stored_data)
+            const sortedIdeas = [...stored_data].sort((a, b) => {
+                return b.likes - a.likes;
+            });
+            if (props.displayType === "byEmployee") {
+                console.log(employeeId)
+                var filteredIdeas = sortedIdeas.filter((item) =>
+                    item['posted_by'] === employeeId
+                )
+                setIdeas(filteredIdeas)
+            }
+            else {
+                setIdeas(sortedIdeas)
+                console.log(ideas)
+            }
+        }
 
 
 
-}
 
-    return(
-        <div style={{marginTop:50}}>
-          <Typography variant="h4" style={{ marginRight: "auto", marginLeft: 30 }}>All Ideas</Typography>
-          <Grid container style={{marginLeft:450, marginTop:50}}>
-              <Grid item xs={2}>
-               {/* <Button variant="contained" color="primary" onClick={handleSort} style={{marginRight:'auto'}}>Sort</Button> */}
-               <SelectComponent  selectList={sortOptions} title="Sort Options" handleSelection={sortBySelectedOption}/>
-               </Grid>
-               <Grid item xs={2} style={{marginLeft:200, marginTop:40}}>
-                   
-          <Button variant="contained" color="primary" onClick={() => setDisplayIdeaFormDialog(true)} ><AddIcon/>Add Idea</Button>
-          </Grid>
-          </Grid>
-          <DialogComponent open={displayIdeaFormDialog} handleCloseCallBack={handleCloseIdeaFormDialog} handleSubmitCallBack={handleSubmitIdeaFormDialog}/>
-          <IdeasCard ideas={ideas} onLikesChange={handleLikesChange}/>
+
+    }, [employeeId, ideas, props.displayType])
+    const handleCloseIdeaFormDialog = (dialogOpenStatus) => {
+        setDisplayIdeaFormDialog(dialogOpenStatus)
+    }
+    const handleSubmitIdeaFormDialog = (FormData) => {
+        var updateIdeas = ideas
+        console.log(FormData)
+        setIdeas(ideas => [...ideas, FormData])
+        console.log(updateIdeas)
+        updateIdeas.push(FormData)
+        console.log(updateIdeas)
+        localStorage.setItem("data", JSON.stringify(updateIdeas))
+        setDisplayIdeaFormDialog(false)
+    }
+
+
+
+
+    const sortBySelectedOption = (sortOption) => {
+        const sortingOption = sortOption['value']
+        if (sortingOption === "Upvotes") {
+            const sortedIdeas = [...ideas].sort((a, b) => {
+                return b.likes - a.likes;
+            });
+            localStorage.setItem("data", JSON.stringify(sortedIdeas))
+            setIdeas(sortedIdeas)
+            console.log(ideas)
+        }
+        else {
+            const sortedIdeas = [...ideas].sort((a, b) => {
+                return new Date(b.date_posted) - new Date(a.date_posted);
+            });
+            setIdeas(sortedIdeas)
+            localStorage.setItem("data", JSON.stringify(sortedIdeas))
+            console.log(ideas)
+        }
+    }
+    const handleLikesDecrement = (idea) => {
+        var temp_idea = idea
+        idea['liked_by'] = temp_idea['liked_by'].filter((item => item !== employeeId))
+        // idea = temp_idea
+        idea['likes'] = temp_idea['likes'] - 1
+        console.log(idea)
+        const updatedIdeas = ideas.map((item) =>
+            item['title'] === idea['title'] ? idea : item
+        );
+        console.log(updatedIdeas)
+        setIdeas(updatedIdeas)
+        localStorage.setItem("data", JSON.stringify(updatedIdeas))
+
+
+
+    }
+    const handleLikesIncrement = (idea) => {
+        var temp_idea = idea
+        // temp_idea['liked_by'].push('Priyanka M.B')
+        // idea = temp_idea
+        idea['likes'] = temp_idea['likes'] + 1
+        idea['liked_by'].push(employeeId)
+        console.log(idea)
+        const updatedIdeas = ideas.map((item) =>
+            item['title'] === idea['title'] ? idea : item
+        );
+        console.log(updatedIdeas)
+        setIdeas(updatedIdeas)
+        localStorage.setItem("data", JSON.stringify(updatedIdeas))
+
+
+
+    }
+
+    return (
+        <div style={styles.root}>
+            {/* <Typography variant="h5" 
+>All Ideas</Typography> */}
+            <Grid container
+                wrap="nowrap"
+                style={styles.container} alignItems="center">
+                <Grid item xs={6}>
+                    {/* <Button variant="contained" color="primary" onClick={handleSort} style={{marginRight:'auto'}}>Sort</Button> */}
+                    <SelectComponent selectList={sortOptions} title="Sort Options" handleSelection={sortBySelectedOption} />
+                </Grid>
+                <Grid item xs={6}>
+
+                    <Button variant="contained" color="primary" onClick={() => setDisplayIdeaFormDialog(true)} style={styles.button} ><AddIcon />Add Idea</Button>
+                </Grid>
+            </Grid>
+            <DialogComponent open={displayIdeaFormDialog} handleCloseCallBack={handleCloseIdeaFormDialog} handleSubmitCallBack={handleSubmitIdeaFormDialog} employeeId={employeeId} />
+            <IdeasCard ideas={ideas} onLikesIncrement={handleLikesIncrement} onLikesDecrement={handleLikesDecrement} employeeId={employeeId} />
         </div>
     )
 }
