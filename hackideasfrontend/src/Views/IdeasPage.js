@@ -28,6 +28,7 @@ export default function IdeasPage(props) {
     const [displayIdeaFormDialog, setDisplayIdeaFormDialog] = React.useState(false)
     React.useEffect(() => {
 
+
         if (JSON.parse(localStorage.getItem("data")) !== null) {
             var stored_data = JSON.parse(localStorage.getItem("data"))
             setIdeas(stored_data)
@@ -49,9 +50,8 @@ export default function IdeasPage(props) {
 
 
 
-
-
-    }, [employeeId, ideas, props.displayType])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const handleCloseIdeaFormDialog = (dialogOpenStatus) => {
         setDisplayIdeaFormDialog(dialogOpenStatus)
     }
@@ -123,7 +123,7 @@ export default function IdeasPage(props) {
     }
 
     return (
-        <div style={styles.root}>
+        <div className="ideas">
             {/* <Typography variant="h5" 
 >All Ideas</Typography> */}
             <Grid container

@@ -5,6 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+
 import Autocomplete from '@mui/material/Autocomplete';
 import DialogTitle from '@mui/material/DialogTitle';
 export default function DialogComponent(props) {
@@ -14,37 +15,37 @@ export default function DialogComponent(props) {
   const [topicDescription, setTopicDescription] = React.useState('')
 
   const [tags, setTags] = React.useState([])
+    
+      const handleClose = () => {
+          props.handleCloseCallBack(false)
+      };
 
-  const handleClose = () => {
-    props.handleCloseCallBack(false)
-  };
+      const handleSubmit = () => {
+          console.log('submit')
+          console.log()
+          const parentReturnData= {
+             
+           
+                'title' : topicName,
+                'description' : topicDescription,
+                'likes' : 0,
+                'tags' : tags,
+                'posted_by' : props.employeeId,
+                'date_posted' : (new Date()),
+                'liked_by' : []
+    
+            }
+          
+        props.handleSubmitCallBack(parentReturnData)
+    };
 
-  const handleSubmit = () => {
-    console.log('submit')
-    console.log()
-    const parentReturnData = {
+      return(
 
-
-      'title': topicName,
-      'description': topicDescription,
-      'likes': 0,
-      'tags': tags,
-      'posted_by': props.employeeId,
-      'date_posted': (new Date()),
-      'liked_by': []
-
-    }
-
-    props.handleSubmitCallBack(parentReturnData)
-  };
-
-  return (
-
-    <Dialog open={props.open} onClose={handleClose}>
+      <Dialog open={props.open} onClose={handleClose}>
       <DialogTitle>Add Idea</DialogTitle>
       <DialogContent>
         <DialogContentText>
-
+         
         </DialogContentText>
         <TextField
           autoFocus
@@ -58,7 +59,7 @@ export default function DialogComponent(props) {
           value={topicName}
           onChange={(event) => setTopicName(event.target.value)}
         />
-        <TextField
+         <TextField
           className="textfield"
           margin="dense"
           id="name"
@@ -69,45 +70,45 @@ export default function DialogComponent(props) {
           value={topicDescription}
           onChange={(event) => setTopicDescription(event.target.value)}
         />
-        <Autocomplete
-          multiple
-          className="textfield"
-          id="tags-outlined"
-          options={preDefinedTags}
-          getOptionLabel={(option) => option.value}
-          // defaultValue={[top100Films[0]]}
-          filterSelectedOptions
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Tags"
-              placeholder="Tags"
-            />
-          )}
-          onChange={(event, newValue) => {
-            setTags(newValue)
-          }}
-        />
+          <Autocomplete
+        multiple
+        className="textfield"
+        id="tags-outlined"
+        options={preDefinedTags}
+        getOptionLabel={(option) => option.value}
+        // defaultValue={[top100Films[0]]}
+        filterSelectedOptions
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Tags"
+            placeholder="Tags"
+          />
+        )}
+        onChange={(event, newValue) => {
+           setTags(newValue)
+        }}
+      />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSubmit}>Submit Idea</Button>
+      <Button onClick={handleSubmit}>Submit Idea</Button>
         <Button onClick={handleClose}>Cancel</Button>
-
+       
       </DialogActions>
     </Dialog>
-  )
+      )
 
-
+      
 }
 
 const preDefinedTags = [
-  { id: 1, value: 'ML / AI' },
-  { id: 2, value: 'IOT' },
-  { id: 3, value: 'Data analytics' },
-  { id: 4, value: 'Robotics' },
-  { id: 5, value: 'BlockChain' },
-  { id: 6, value: 'Edge Computing. ' },
-  { id: 7, value: 'Cyber Security' }
+    { id: 1, value:  'ML / AI'},
+    { id: 2, value: 'IOT' },
+    { id: 3 , value: 'Data analytics' },
+    { id: 4, value: 'Robotics' },
+    { id: 5, value: 'BlockChain' },
+    { id: 6 , value: 'Edge Computing. ' },
+    { id: 7 , value: 'Cyber Security' }
 ]
 
 

@@ -51,45 +51,45 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function AppBarComponent() {
   const history = createHashHistory()
-  const handleLogOut = () => {
-    history.goBack()
+  const handleLogOut = () =>{
+  history.goBack()
   }
 
+  
+  
 
-
-
-
-
+  
+  
 
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-
-      <Toolbar>
-        <LightbulbIcon style={{ color: "orange", marginTop: -3 }} fontSize="large" />
-        <Typography
-          variant="h6"
-          color="black"
-          noWrap
-          component="div"
-          sx={{ display: { xs: 'none', sm: 'block' } }}
-        >
-          SherHackers Home
-        </Typography>
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-        <Box sx={{ flexGrow: 1 }} />
-        <Button color="inherit" onClick={handleLogOut}>Logout</Button>
-      </Toolbar>
-
-
+     
+        <Toolbar>
+          <LightbulbIcon style={{color:"orange", marginTop:-3}} fontSize="large"/>
+          <Typography
+            variant="h6"
+            color="black"
+            noWrap
+            component="div"
+            sx={{ display: { xs: 'none', sm: 'block' } }}
+          >
+           SherHackers Home
+          </Typography>
+           <Search> 
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1 }}/>
+          <Button color="inherit" onClick={handleLogOut}>Logout</Button>
+        </Toolbar>
+        
+      
     </Box>
   );
 }

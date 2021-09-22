@@ -48,7 +48,7 @@ export default function BasicCard(props) {
         <div>
           {props.ideas.map((idea, i) => {
             return (
-              <Card key={i} sx={{ minWidth: 600, maxWidth: 600, marginTop: 3 }}>
+              <Card key={i} sx={{ minWidth: 600, maxWidth: 600, marginTop: 3 , maxHeight:250}}>
                 <CardContent>
 
                   <Box sx={{ flexGrow: 1 }}>

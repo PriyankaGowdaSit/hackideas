@@ -48,3 +48,13 @@
   align-items: center;
   margin-top:40;
 }
+
+.ideas {  
+  margin-top: -80px
+}
+/* responsive, form small screens, use 13px font size */
+@media screen and (max-width: 1200px) {
+  .ideas {
+     margin-top: 10px;
+  }
+}
