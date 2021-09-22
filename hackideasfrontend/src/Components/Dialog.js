@@ -24,11 +24,17 @@ export default function DialogComponent(props) {
           console.log('submit')
           console.log()
           const parentReturnData= {
-              'openStatus': false,
-              'topicName' : topicName,
-              'topicDescription' : topicDescription,
-              'tags' : tags
-          }
+             
+           
+                'title' : topicName,
+                'description' : 'Description of the title',
+                'likes' : 0,
+                'tags' : topicDescription,
+                'posted_by' : 'Priyanka MB',
+                'date_posted' : (new Date()).setDate(11)
+    
+            }
+          
         props.handleSubmitCallBack(parentReturnData)
     };
 

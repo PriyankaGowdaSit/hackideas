@@ -11,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import Grid from '@material-ui/core/Grid'
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { InsertEmoticon, SettingsSystemDaydreamSharp } from '@material-ui/icons';
 const bull = (
   <Box
@@ -27,6 +28,19 @@ export default function BasicCard(props) {
     // const [ideas, setIdeas] = React.useState(props.ideas)
     const [displayUpdatedData, setDisplayUpdatedData] = React.useState(false)
   
+    const handleClick = () =>{
+      console.log('clicked')
+    }
+    const handleLikesDecrement = (idea) =>{
+    
+    
+      props.onLikesDecrement(idea)
+    }
+    const handleLikesIncrement = (idea) =>{
+      
+    
+      props.onLikesIncrement(idea)
+    }
   return (
      <div>
      {/* {console.log(ideas)} */}
@@ -51,12 +65,20 @@ export default function BasicCard(props) {
         <div style={{marginTop:20}}>
         <Typography style={{ fontSize: 12, color:"grey", display:"flex", alignItems:"left"}}>{idea.posted_by}</Typography>
         <div style={{display: 'flex', justifyContent:'flex-end', marginTop:-30}}>
-        <Typography inline variant="body1" style={{ fontSize: 12, color:"grey"}} align="right">{idea.likes}<FormControlLabel
+        <Typography inline variant="body1" style={{ fontSize: 12, color:"grey"}} align="right">{idea.likes}
+        {/* <FormControlLabel
+        onClick={handleClick}
         control={<Checkbox icon={<FavoriteBorder checked={true}/>} 
                   checkedIcon={<Favorite/>}
           name="checkedH" defaultChecked />}
        
-      /></Typography>
+      /> */}
+      {(idea.liked_by).includes('Priyanka M.B') ? (
+        <FavoriteIcon style={{color:"red"}} onClick={() => handleLikesDecrement(idea)}/>
+      ):(
+       <FavoriteBorder onClick={() => handleLikesIncrement(idea)}/>
+      )}
+      </Typography>
       </div>
        
       </div>
