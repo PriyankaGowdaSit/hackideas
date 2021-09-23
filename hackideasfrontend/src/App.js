@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './Views/Home';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
      <Home/>

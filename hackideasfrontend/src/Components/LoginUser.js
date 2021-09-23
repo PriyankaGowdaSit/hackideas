@@ -31,7 +31,7 @@ export default function LoginUser() {
                 <Grid item xs={12} md={12} lg={12} style={{ display: "flex" }}>
                     <div style={{ marginTop: 100, display: "flex" }}>
                         <TextField autoFocus id="outlined-basic" label="Employee Id" variant="outlined" style={{ marginLeft: 50 }} value={employeeId} onChange={(event) => setEmployeeId(event.target.value)} />
-                        <Button color="primary" variant="contained" onClick={handleEmployeeLogin} style={{ width: 200, height: 50, marginLeft: 50 }} disabled={employeeId !== '' ? false : true}>Get Started<ArrowRightAltIcon /></Button>
+                        <Button color="primary" variant="contained" onClick={handleEmployeeLogin} style={{ width: 200, height: 50, marginLeft: 50 }} disabled={employeeId !== '' ? false : true} id="loginButton">Get Started<ArrowRightAltIcon /></Button>
                     </div>
 
                     <img src="/Images/coverpage.png" height="600" width="450" style={{ marginLeft: "auto", marginRight: 150 }} alt="display"/>
