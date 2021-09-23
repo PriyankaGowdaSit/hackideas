@@ -1,6 +1,14 @@
 # hackideas
 Website to upload hack ideas
 
+
+Steps to start application in local
+
+1.`` git clone https://github.com/PriyankaGowdaSit/hackideas.git``
+2. ``cd hackideas && cd hackideasfrontend``
+3. ``npm install``
+4. ``npm run start``
+
 Steps to start the application in your local machine with docker image
 
 1. docker pull docker.io/priyankagowda/hackathonideas
